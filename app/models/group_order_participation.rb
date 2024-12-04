@@ -2,13 +2,14 @@
 #
 # Table name: group_order_participations
 #
-#  id                  :bigint           not null, primary key
-#  quantity_ordered    :integer          not null
-#  unit_price_at_order :decimal(10, 2)   not null
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  group_order_id      :bigint           not null
-#  member_id           :bigint           not null
+#  id                           :bigint           not null, primary key
+#  bulk_discount_price_at_order :decimal(10, 2)   default(0.0), not null
+#  quantity_ordered             :integer          not null
+#  unit_price_at_order          :decimal(10, 2)   not null
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  group_order_id               :bigint           not null
+#  member_id                    :bigint           not null
 #
 # Indexes
 #
@@ -24,4 +25,6 @@ class GroupOrderParticipation < ApplicationRecord
   belongs_to :group_order
   belongs_to :member
   validates :quantity_ordered, numericality: {greater_than: 0}
+  validates :unit_price_at_order, presence: true
+  validates :bulk_discount_price_at_order, presence: true
 end

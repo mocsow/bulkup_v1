@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_02_161412) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_02_173123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_02_161412) do
     t.decimal "unit_price_at_order", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "bulk_discount_price_at_order", precision: 10, scale: 2, default: "0.0", null: false
     t.index ["group_order_id"], name: "index_group_order_participations_on_group_order_id"
     t.index ["member_id"], name: "index_group_order_participations_on_member_id"
   end
