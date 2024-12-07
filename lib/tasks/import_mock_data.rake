@@ -3,12 +3,23 @@ namespace :mock_data do
   task import: :environment do
     require 'csv'
 
+    # Import Admins
+    puts "Importing admins..."
+    CSV.foreach(Rails.root.join('db/mock_data/admins.csv'), headers: true) do |row|
+      Admin.find_or_create_by!(email: row['email']) do |admin|
+        admin.name = row['name']
+        admin.password = row['password']
+        admin.created_at = row['created_at']
+        admin.updated_at = row['updated_at']
+      end
+    end
+    puts "Finished importing members."
     # Import Members
     puts "Importing members..."
     CSV.foreach(Rails.root.join('db/mock_data/members.csv'), headers: true) do |row|
       Member.find_or_create_by!(email: row['email']) do |member|
         member.business_name = row['business_name']
-        member.password_digest = row['password_digest']
+        member.password = row['password']
         member.created_at = row['created_at']
         member.updated_at = row['updated_at']
       end

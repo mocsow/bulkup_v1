@@ -1,5 +1,7 @@
-module Admin
+module AdminPanel
   class GroupOrdersController < ApplicationController
+    before_action :authenticate_member! # ensures only authenticated members can access
+
     def index
       @group_orders = GroupOrder.all
     end

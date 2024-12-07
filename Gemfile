@@ -43,7 +43,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 # for user authentication
-gem 'bcrypt', '~> 3.1.7'
+gem 'devise'
 
 # to upload csv files
 gem 'smarter_csv'
