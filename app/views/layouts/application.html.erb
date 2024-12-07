@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails Template</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BulkUP</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
-    <nav>
-      <a href="/">
-        Home
-      </a>
-    </nav>
+    <header>
+      <nav>
+        <% if member_signed_in? %>
+          <p>Welcome, <%= current_member.business_name %>!</p>
+          <%= link_to "Sign Out", destroy_member_session_path, class: "btn btn-secondary" %> <!-- Using GET route for sign-out -->
+        <% elsif admin_signed_in? %>
+          <p>Welcome, <%= current_admin.name %>!</p>
+          <%= link_to "Sign Out", destroy_admin_session_path, class: "btn btn-secondary" %> <!-- Using GET route for sign-out -->
+        <% else %>
+          <%= link_to "Member Sign In", new_member_session_path, class: "btn btn-primary" %>
+          <%= link_to "Admin Sign In", new_admin_session_path, class: "btn btn-primary" %>
+        <% end %>
+      </nav>
+    </header>
 
-    <%= yield %>
+    <%= yield %> <!-- Main content of the page -->
   </body>
 </html>

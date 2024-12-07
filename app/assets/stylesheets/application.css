@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+ .product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.order-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.auth-buttons {
+  margin-bottom: 16px;
+}
+
+.auth-buttons .btn {
+  margin-right: 8px;
+}

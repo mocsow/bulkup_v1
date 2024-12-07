@@ -1,2 +1,8 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<h1><%= @product.name %></h1>
+
+<p><%= @product.description %></p>
+<p><strong>Unit Price:</strong> $<%= @product.unit_price %></p>
+<p><strong>Bulk Price:</strong> $<%= @product.bulk_discount_price %></p>
+<p><strong>Min Order:</strong> <%= @product.minimum_order_quantity %></p>
+
+<%= link_to "Back to Catalog", products_path, class: "btn btn-secondary" %>

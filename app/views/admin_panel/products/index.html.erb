@@ -1,2 +1,17 @@
-<h1>Admin::Products#index</h1>
-<p>Find me in app/views/admin/products/index.html.erb</p>
+<h1>Manage Products</h1>
+
+<div class="product-grid">
+  <% @products.each do |product| %>
+    <div class="product-card">
+      <h3><%= product.product_name %></h3>
+      <p><%= product.product_description %></p>
+      <p><strong>Unit Price:</strong> $<%= product.unit_price %></p>
+      <p><strong>Bulk Price:</strong> $<%= product.bulk_discount_price %></p>
+      <p><strong>Min Order:</strong> <%= product.minimum_order_quantity %></p>
+      <%= link_to "Edit", edit_admin_panel_product_path(product), class: "btn btn-warning" %>
+      <%= link_to "Delete", admin_panel_product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Add New Product", new_admin_panel_product_path, class: "btn btn-success" %>

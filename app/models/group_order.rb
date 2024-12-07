@@ -18,7 +18,7 @@
 #  fk_rails_...  (product_id => products.id)
 #
 class GroupOrder < ApplicationRecord
-  belongs_to :product
+  belongs_to :product, foreign_key: :product
   has_many :group_order_participations
   has_many :members, through: :group_order_participations
   validates :status, inclusion: { in: %w[pending full placed delivered] }

@@ -1,2 +1,13 @@
-<h1>Admin::GroupOrders#index</h1>
-<p>Find me in app/views/admin/group_orders/index.html.erb</p>
+<h1>Manage Group Orders</h1>
+
+<ul class="order-list">
+  <% @group_orders.each do |group_order| %>
+    <li>
+      <strong>Order ID:</strong> <%= group_order.id %> |
+      <strong>Product:</strong> <%= group_order.product.product_name %> |
+      <strong>Total Quantity:</strong> <%= group_order.total_quantity %> |
+      <strong>Status:</strong> <%= group_order.status %> |
+      <%= link_to "View Details", admin_panel_group_order_path(group_order), class: "btn btn-primary" %>
+    </li>
+  <% end %>
+</ul>

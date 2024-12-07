@@ -1,2 +1,17 @@
-<h1>Admin::GroupOrders#show</h1>
-<p>Find me in app/views/admin/group_orders/show.html.erb</p>
+<h1>Group Order Details</h1>
+
+<p><strong>Product:</strong> <%= @group_order.product.product_name %></p>
+<p><strong>Total Quantity:</strong> <%= @group_order.total_quantity %></p>
+<p><strong>Status:</strong> <%= @group_order.status %></p>
+
+<h2>Participants</h2>
+<ul>
+  <% @participants.each do |participation| %>
+    <li>
+      <strong><%= participation.member.business_name %>:</strong> 
+      <%= participation.quantity_ordered %> units
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Mark as Delivered", admin_panel_group_order_path(@group_order, status: "delivered"), method: :patch, class: "btn btn-success" %>

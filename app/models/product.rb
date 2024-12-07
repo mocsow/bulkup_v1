@@ -13,6 +13,6 @@
 #  updated_at             :datetime         not null
 #
 class Product < ApplicationRecord
-  has_many :group_orders
+  has_many :group_orders, foreign_key: :product
   validates :name, :unit_price, :bulk_discount_price, :minimum_order_quantity, presence: true
 end

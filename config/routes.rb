@@ -3,6 +3,15 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :members
 
+  # Custom GET routes for sign-out
+  devise_scope :member do
+    get "/members/sign_out", to: "devise/sessions#destroy"
+  end
+
+  devise_scope :admin do
+    get "/admins/sign_out", to: "devise/sessions#destroy"
+  end
+
   # Member routes
   root "products#index" # Homepage to show product catalog
   resources :products, only: [:index, :show] # Catalog and product details
