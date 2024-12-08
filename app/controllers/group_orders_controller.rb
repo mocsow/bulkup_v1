@@ -1,5 +1,5 @@
 class GroupOrdersController < ApplicationController
-  before_action :authenticate_member! # Ensures only authenticated members can access these actions
+  before_action :authenticate_member! # Ensure only authenticated members can access
 
   def show
     @group_order = GroupOrder.find(params[:id])

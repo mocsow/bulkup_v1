@@ -9,6 +9,7 @@
       <th>Status</th>
       <th>Total Paid</th>
       <th>Total Saved</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,15 @@
         <td><%= order.group_order.status %></td>
         <td><%= number_to_currency(order.quantity_ordered * order.unit_price_at_order) %></td>
         <td><%= number_to_currency(order.quantity_ordered * (order.unit_price_at_order - order.bulk_discount_price_at_order)) %></td>
+        <td>
+          <% if order.group_order.status == "pending" %>
+            <%= button_to "Cancel", cancel_group_order_path(order.group_order), 
+                method: :delete, class: "btn btn-danger", 
+                data: { confirm: "Are you sure you want to cancel this order?" } %>
+          <% else %>
+            N/A
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
