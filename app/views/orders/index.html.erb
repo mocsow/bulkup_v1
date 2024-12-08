@@ -1,12 +1,26 @@
 <h1>My Orders</h1>
 
-<ul class="order-list">
-  <% @orders.each do |order| %>
-    <li>
-      <strong>Order ID:</strong> <%= order.group_order.id %> |
-      <strong>Product:</strong> <%= order.group_order.product.product_name %> |
-      <strong>Quantity:</strong> <%= order.quantity_ordered %> |
-      <strong>Status:</strong> <%= order.group_order.status %>
-    </li>
-  <% end %>
-</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Status</th>
+      <th>Total Paid</th>
+      <th>Total Saved</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.group_order.id %></td>
+        <td><%= order.group_order.product.name %></td>
+        <td><%= order.quantity_ordered %></td>
+        <td><%= order.group_order.status %></td>
+        <td><%= number_to_currency(order.quantity_ordered * order.unit_price_at_order) %></td>
+        <td><%= number_to_currency(order.quantity_ordered * (order.unit_price_at_order - order.bulk_discount_price_at_order)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

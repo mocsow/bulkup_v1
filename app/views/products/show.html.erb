@@ -1,8 +1,42 @@
 <h1><%= @product.name %></h1>
 
-<p><%= @product.description %></p>
-<p><strong>Unit Price:</strong> $<%= @product.unit_price %></p>
-<p><strong>Bulk Price:</strong> $<%= @product.bulk_discount_price %></p>
-<p><strong>Min Order:</strong> <%= @product.minimum_order_quantity %></p>
+<div class="product-details">
+  <div class="product-image">
+    <%= image_tag @product.image_url, alt: @product.name, class: "img-fluid" %>
+  </div>
 
-<%= link_to "Back to Catalog", products_path, class: "btn btn-secondary" %>
+  <div class="product-info">
+    <p><%= @product.description %></p>
+    <p><strong>Unit Price:</strong> $<%= @product.unit_price %></p>
+    <p><strong>Bulk Price:</strong> $<%= @product.bulk_discount_price %></p>
+    <p><strong>Min Order:</strong> <%= @product.minimum_order_quantity %></p>
+  </div>
+</div>
+
+<div class="current-order-box">
+  <% if @group_order&.total_quantity.to_i < @product.minimum_order_quantity %>
+    <p><strong>Current Order:</strong> <%= @group_order.total_quantity %> units</p>
+    <p><strong>Units needed to reach bulk discount:</strong> <%= @product.minimum_order_quantity - @group_order.total_quantity %></p>
+  <% else %>
+    <p>The group order has reached the minimum quantity!</p>
+  <% end %>
+</div>
+
+<div class="join-order-form">
+  <h3>Join the Group Order</h3>
+  <%= form_with url: join_group_order_path(@group_order), method: :post, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :quantity_ordered, "Enter Quantity" %>
+      <%= f.number_field :quantity_ordered, class: "form-control", min: 1 %>
+    </div>
+    <div>
+      <%= f.submit "Join", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<br> <!-- Adds whitespace between the buttons -->
+
+<div>
+  <%= link_to "Back to Catalog", products_path, class: "btn btn-secondary" %>
+</div>
