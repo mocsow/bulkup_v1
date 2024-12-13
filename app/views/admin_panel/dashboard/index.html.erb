@@ -1,8 +1,14 @@
 <h1>Admin Dashboard</h1>
 
-<p><strong>Total Products:</strong> <%= @total_products %></p>
-<p><strong>Total Group Orders:</strong> <%= @total_group_orders %></p>
-<p><strong>Pending Orders:</strong> <%= @pending_orders %></p>
+<div class="stats">
+  <p><strong>Total Products:</strong> <%= @total_products %></p>
+  <p><strong>Total Group Orders:</strong> <%= @total_group_orders %></p>
+  <p><strong>Pending Orders:</strong> <%= @pending_orders %></p>
+</div>
 
-<%= link_to "Manage Products", admin_panel_products_path, class: "btn btn-primary" %>
-<%= link_to "Manage Group Orders", admin_panel_group_orders_path, class: "btn btn-primary" %>
+<nav>
+  <ul>
+    <li><%= link_to "Manage Products", admin_panel_products_path, class: "btn btn-primary" %></li>
+    <li><%= link_to "Manage Group Orders", admin_panel_group_orders_path, class: "btn btn-primary" %></li>
+  </ul>
+</nav>

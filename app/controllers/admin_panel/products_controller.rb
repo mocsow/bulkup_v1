@@ -1,6 +1,6 @@
 module AdminPanel
   class ProductsController < ApplicationController
-    before_action :authenticate_member! # ensures only authenticated members can access
+    before_action :authenticate_admin! # Ensures only authenticated admins can access
 
     def index
       @products = Product.all
@@ -13,9 +13,9 @@ module AdminPanel
     def create
       @product = Product.new(product_params)
       if @product.save
-        redirect_to admin_panel_products_path, notice: "Product added to catalogue."
+        redirect_to admin_panel_products_path, notice: "Product added to the catalog."
       else
-        render :new
+        render :new, alert: "Failed to add product. Please correct the errors."
       end
     end
 
@@ -26,16 +26,19 @@ module AdminPanel
     def update
       @product = Product.find(params[:id])
       if @product.update(product_params)
-        redirect_to admin_panel_products_path, notice: "Product successfully updated."
+        redirect_to admin_panel_products_path, notice: "Product updated successfully."
       else
-        render :edit
+        render :edit, alert: "Failed to update product. Please correct the errors."
       end
     end
 
     def destroy
       @product = Product.find(params[:id])
-      @product.destroy
-      redirect_to admin_panel_products_path, notice: "Product successfully deleted."
+      if @product.destroy
+        redirect_to admin_panel_products_path, notice: "Products successfully deleted."
+      else
+        redirect_to admin_panel_products_path, alert: "Failed to delete product.  Please try again"
+      end
     end
 
     private

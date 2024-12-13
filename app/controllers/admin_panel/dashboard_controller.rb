@@ -1,6 +1,6 @@
 module AdminPanel
   class DashboardController < ApplicationController
-    before_action :authenticate_member! # ensures only authenticated members can access
+    before_action :authenticate_admin! # Ensure only admins can access this page
 
     def index
       @total_products = Product.count

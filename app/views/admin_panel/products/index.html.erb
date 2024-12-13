@@ -1,17 +1,31 @@
-<h1>Manage Products</h1>
+<h1>Products</h1>
 
-<div class="product-grid">
-  <% @products.each do |product| %>
-    <div class="product-card">
-      <h3><%= product.product_name %></h3>
-      <p><%= product.product_description %></p>
-      <p><strong>Unit Price:</strong> $<%= product.unit_price %></p>
-      <p><strong>Bulk Price:</strong> $<%= product.bulk_discount_price %></p>
-      <p><strong>Min Order:</strong> <%= product.minimum_order_quantity %></p>
-      <%= link_to "Edit", edit_admin_panel_product_path(product), class: "btn btn-warning" %>
-      <%= link_to "Delete", admin_panel_product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-    </div>
-  <% end %>
-</div>
+<%= link_to "Add New Product", new_admin_panel_product_path, class: "btn btn-primary mb-3" %>
 
-<%= link_to "Add New Product", new_admin_panel_product_path, class: "btn btn-success" %>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit Price</th>
+      <th>Bulk Price</th>
+      <th>Min Order</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= truncate(product.description, length: 50) %></td>
+        <td><%= number_to_currency(product.unit_price) %></td>
+        <td><%= number_to_currency(product.bulk_discount_price) %></td>
+        <td><%= product.minimum_order_quantity %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_panel_product_path(product), class: "btn btn-sm btn-warning" %>
+          <%= link_to "Delete", admin_panel_product_path(product), method: :delete, data: { confirm: "Are you sure you want to delete this product?" }, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

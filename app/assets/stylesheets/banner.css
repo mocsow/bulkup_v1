@@ -1,0 +1,22 @@
+/* Styling for the universal banner */
+.banner {
+  background-color: #007bff; /* A blue background */
+  color: blue; /* White text */
+  text-align: center; /* Center-align the text */
+  padding: 15px 0; /* Add vertical space for the banner */
+  font-size: 24px; /* Larger font size for the text */
+  font-weight: bold; /* Bold text */
+  width: 100%; /* Ensure the banner spans the full width */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+}
+
+.banner-link {
+  color: blue; /* Make link color match the banner text */
+  text-decoration: none; /* Remove underline from the link */
+}
+
+.banner-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}

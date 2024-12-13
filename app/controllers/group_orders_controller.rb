@@ -3,6 +3,8 @@ class GroupOrdersController < ApplicationController
 
   def show
     @group_order = GroupOrder.find(params[:id])
+    @participants = @group_order.group_order_participations.includes(:member)
+
   end
 
   def join
@@ -11,7 +13,7 @@ class GroupOrdersController < ApplicationController
     # Create a new participation for the current member
     group_order_participation = @group_order.group_order_participations.create!(
       member: current_member,
-      quantity_ordered: params[:quantity].to_i,
+      quantity_ordered: params[:quantity_ordered].to_i,
       unit_price_at_order: @group_order.product.unit_price,
       bulk_discount_price_at_order: @group_order.product.bulk_discount_price
     )

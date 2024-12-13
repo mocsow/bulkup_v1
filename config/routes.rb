@@ -12,8 +12,19 @@ Rails.application.routes.draw do
     get "/admins/sign_out", to: "devise/sessions#destroy"
   end
 
+  # Custom root based on user type
+  authenticated :admin do
+    root to: "admin_panel/dashboard#index", as: :authenticated_admin_root
+  end
+
+  authenticated :member do
+    root to: "products#index", as: :authenticated_member_root
+  end
+
+  # Default root for unauthenticated users
+  root "products#index"
+
   # Member routes
-  root "products#index" # Homepage to show product catalog
   resources :products, only: [:index, :show] # Catalog and product details
   resources :orders, only: [:index] # Member's orders
   resources :group_orders, only: [:show] do
@@ -26,7 +37,7 @@ Rails.application.routes.draw do
   # AdminPanel routes
   namespace :admin_panel do
     root "dashboard#index" # Admin dashboard
-    resources :products # CRUD management of products
+    resources :products [:show] # CRUD management of products
     resources :group_orders, only: [:index, :show, :update] # Admin management of group orders
   end
 end

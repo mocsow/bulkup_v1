@@ -11,6 +11,12 @@
 
   <body>
     <header>
+      <%= link_to "bulkUP", products_path, class: "banner-link" %>
+    </header>
+  </body>
+
+  <body>
+    <header>
       <nav>
         <% if member_signed_in? %>
           <p>Welcome, <%= current_member.business_name %>!</p>

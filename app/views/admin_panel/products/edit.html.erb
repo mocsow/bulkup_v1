@@ -1,2 +1,36 @@
-<h1>Admin::Products#edit</h1>
-<p>Find me in app/views/admin/products/edit.html.erb</p>
+<h1>Edit Product</h1>
+
+<%= form_with model: @product, url: admin_panel_product_path(@product), method: :patch, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "Product Name" %>
+    <%= f.text_field :name, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :image_url, "Image URL" %>
+    <%= f.text_field :image_url, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :unit_price, "Unit Price" %>
+    <%= f.number_field :unit_price, step: 0.01, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :bulk_discount_price, "Bulk Discount Price" %>
+    <%= f.number_field :bulk_discount_price, step: 0.01, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :minimum_order_quantity, "Minimum Order Quantity" %>
+    <%= f.number_field :minimum_order_quantity, class: "form-control", required: true %>
+  </div>
+
+  <%= f.submit "Save Changes", class: "btn btn-primary" %>
+  <%= link_to "Back to Product List", admin_panel_products_path, class: "btn btn-secondary" %>
+<% end %>
