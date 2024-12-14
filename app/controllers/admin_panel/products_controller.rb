@@ -34,12 +34,13 @@ module AdminPanel
 
     def destroy
       @product = Product.find(params[:id])
-      if @product.destroy
-        redirect_to admin_panel_products_path, notice: "Products successfully deleted."
-      else
-        redirect_to admin_panel_products_path, alert: "Failed to delete product.  Please try again"
-      end
+      @product.destroy
+      redirect_to admin_panel_products_path, notice: "Product successfully deleted."
     end
+
+    #def delete
+     # @product = Product.find(params:[id])
+    #end
 
     private
 

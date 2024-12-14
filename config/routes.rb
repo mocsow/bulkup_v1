@@ -37,7 +37,11 @@ Rails.application.routes.draw do
   # AdminPanel routes
   namespace :admin_panel do
     root "dashboard#index" # Admin dashboard
-    resources :products [:show] # CRUD management of products
+    resources :products, except: [:show] do
+      member do
+        get :delete # Route for delete confirmation page
+      end
+    end
     resources :group_orders, only: [:index, :show, :update] # Admin management of group orders
   end
 end
