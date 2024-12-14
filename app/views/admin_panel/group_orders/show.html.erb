@@ -1,17 +1,36 @@
-<h1>Group Order Details</h1>
+<h1>Group Order #<%= @group_order.id %></h1>
 
-<p><strong>Product:</strong> <%= @group_order.product.product_name %></p>
+<p><strong>Product:</strong> <%= @group_order.product.name %></p>
 <p><strong>Total Quantity:</strong> <%= @group_order.total_quantity %></p>
+<p><strong>Minimum Order Quantity:</strong> <%= @product.minimum_order_quantity%>
 <p><strong>Status:</strong> <%= @group_order.status %></p>
+<p><strong>Created At:</strong> <%= @group_order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
 
 <h2>Participants</h2>
-<ul>
-  <% @participants.each do |participation| %>
-    <li>
-      <strong><%= participation.member.business_name %>:</strong> 
-      <%= participation.quantity_ordered %> units
-    </li>
-  <% end %>
-</ul>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Business Name</th>
+      <th>Quantity Ordered</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @participants.each do |participation| %>
+      <tr>
+        <td><%= participation.member.business_name %></td>
+        <td><%= participation.quantity_ordered %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to "Mark as Delivered", admin_panel_group_order_path(@group_order, status: "delivered"), method: :patch, class: "btn btn-success" %>
+<h2>Update Status</h2>
+<%= form_with url: admin_panel_group_order_path(@group_order), method: :patch, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :status, "Status" %>
+    <%= f.select :status, options_for_select(["pending", "full", "placed", "delivered"], @group_order.status), class: "form-control" %>
+  </div>
+  <%= f.submit "Update Status", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "Back to Group Orders", admin_panel_group_orders_path, class: "btn btn-secondary" %>

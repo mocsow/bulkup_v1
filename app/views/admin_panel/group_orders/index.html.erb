@@ -1,13 +1,30 @@
-<h1>Manage Group Orders</h1>
+<h1>Group Orders</h1>
 
-<ul class="order-list">
-  <% @group_orders.each do |group_order| %>
-    <li>
-      <strong>Order ID:</strong> <%= group_order.id %> |
-      <strong>Product:</strong> <%= group_order.product.product_name %> |
-      <strong>Total Quantity:</strong> <%= group_order.total_quantity %> |
-      <strong>Status:</strong> <%= group_order.status %> |
-      <%= link_to "View Details", admin_panel_group_order_path(group_order), class: "btn btn-primary" %>
-    </li>
-  <% end %>
-</ul>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Product</th>
+      <th>Total Quantity</th>
+      <th>Minimum Order Quantity</th>
+      <th>Status</th>
+      <th>Created At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @group_orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.product.name %></td>
+        <td><%= order.total_quantity %></td>
+        <td><%= order.product.minimum_order_quantity%>
+        <td><%= order.status %></td>
+        <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td>
+          <%= link_to "View Details", admin_panel_group_order_path(order), class: "btn btn-sm btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

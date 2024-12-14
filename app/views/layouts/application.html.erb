@@ -11,20 +11,21 @@
 
   <body>
     <header>
+      <!-- Main Banner -->
       <%= link_to "bulkUP", products_path, class: "banner-link" %>
     </header>
-  </body>
 
-  <body>
     <header>
+      <!-- Navigation Section -->
       <nav>
         <% if member_signed_in? %>
           <p>Welcome, <%= current_member.business_name %>!</p>
-          <%= link_to "My Orders", orders_path, class: "btn btn-primary"%>
-          <%= link_to "Sign Out", destroy_member_session_path, class: "btn btn-secondary" %> <!-- Using GET route for sign-out -->
+          <%= link_to "My Orders", orders_path, class: "btn btn-primary" %>
+          <%= link_to "Sign Out", destroy_member_session_path, method: :delete, class: "btn btn-secondary" %>
         <% elsif admin_signed_in? %>
           <p>Welcome, <%= current_admin.name %>!</p>
-          <%= link_to "Sign Out", destroy_admin_session_path, class: "btn btn-secondary" %> <!-- Using GET route for sign-out -->
+          <%= link_to "Admin Panel", admin_panel_root_path, class: "btn btn-primary" %>
+          <%= link_to "Sign Out", destroy_admin_session_path, method: :delete, class: "btn btn-secondary" %>
         <% else %>
           <%= link_to "Member Sign In", new_member_session_path, class: "btn btn-primary" %>
           <%= link_to "Admin Sign In", new_admin_session_path, class: "btn btn-primary" %>
@@ -32,6 +33,7 @@
       </nav>
     </header>
 
-    <%= yield %> <!-- Main content of the page -->
+    <!-- Main Content -->
+    <%= yield %>
   </body>
 </html>
